@@ -27,12 +27,12 @@ class Config(object):
         return False
 
     def prepare(self, conf_file="sframe.yaml"):
-        if not os.path.exists(os.path.join("conf", conf_file)):
+        cwd = os.path.dirname(os.path.join(os.getcwd()))
+        config_dir = os.path.join(cwd, "conf")
+        if not os.path.exists(os.path.join(config_dir, conf_file)):
             print("Config file %s does not exist" % os.path.join("conf", conf_file))
             sys.exit()
-        cwd = os.getcwd()
 
-        config_dir = os.path.join(cwd, "conf")
         for root, dirs, files in os.walk(config_dir):
             for f in files:
                 if f.endswith(".yaml") and not f.startswith("log"):
@@ -46,13 +46,11 @@ class Config(object):
                     o.close()
         timestamp = time.strftime("%Y-%m-%d-%H-%M-%S")
         log_dir = os.path.join(cwd, "output", timestamp, "logs")
-        self._data["sframe"]["output"] = os.path.join(cwd, "output", timestamp)
-        os.environ["OUTPUT_DIR"] = os.path.join(cwd, "output", timestamp)
-        if not log_dir:
-            os.makedirs(log_dir)
+        self._data["sframe"]["output"] = os.environ["OUTPUT_DIR"] = os.path.join(cwd, "output", timestamp)
+        os.makedirs(log_dir)
         self._data["sframe"]["base"] = cwd
-        return self._data
-'''        lfc = os.path.join(config_dir, "logger.yaml")
+        print(self._data.items())
+        lfc = os.path.join(config_dir, "logger.yaml")
         if os.path.exists(lfc):
             with open(lfc, "r") as o:
                 logger = yaml.safe_load(o.read())
@@ -65,5 +63,5 @@ class Config(object):
         else:
             log_file_name = os.path.join(log_dir, "%s.xml" % timestamp)
             logging.basicConfig(filename=log_file_name, level=logging.INFO)
-'''
 
+        return self._data

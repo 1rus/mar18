@@ -23,6 +23,8 @@ if 'screenshots' in cf['sframe']:
         print("has screenshots option")
 
 print(cf)
+print(os.environ["OUTPUT_DIR"])
+print('/n')
 
 default_browser = cf["browser"]
 print(default_browser)
