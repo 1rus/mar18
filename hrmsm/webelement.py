@@ -4,7 +4,7 @@ from hrmsm.exceptions import InvalidLocatorString
 
 class WebElement(SeleniumWebElement):
     def __init__(self, element):
-        super(WebElement, self).__init__(element.parent, element.id)
+        self.__dict__.update(element.__dict__)
 
     def find_element_by_locator(self, locator):
         locator_type = locator[:locator.find('=')]
@@ -16,7 +16,7 @@ class WebElement(SeleniumWebElement):
         elif locator_type == 'class':
             return WebElement(self.find_element_by_class_name(locator_value))
         elif locator_type == 'css':
-            return WebElement(self.find_elements_by_css_selector(locator_value))
+            return WebElement(self.find_element_by_css_selector(locator_value))
         elif locator_type == 'xpath':
             return WebElement(self.find_element_by_xpath(locator_value))
         else:
@@ -37,5 +37,5 @@ class WebElement(SeleniumWebElement):
             elements = self.find_elements_by_xpath(locator_value)
         else:
             raise InvalidLocatorString(locator)
-        return [WebElement(e) for e in elements]
+        return (WebElement(e) for e in elements)
 

@@ -45,8 +45,6 @@ class Browser(object):
         self.browser_config = br_conf
         self.c = all_conf
         profile = None
-        print('browser init')
-        print(br_conf)
         caps = cap_map[br_conf["type"]]
 
         if br_conf["type"] == "firefox":

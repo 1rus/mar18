@@ -12,11 +12,12 @@ invalid_creds = 'Invalid credentials'
 #@pytest.mark.incremental
 class Test_Login(FrameTestCase):
 
-
     def test_valid_login(self):
         page = LoginPage(self.driver)
         page.open()
         page.login_with(username='admin', password='Password')
+        self.take_numbered_screenshot()
+        self.take_numbered_screenshot()
         self.assertions.verify_equal(page.title(), title)
         self.assertions.verify_equal(self.driver.find_element_by_id('welcome').text, success)
 
@@ -24,6 +25,7 @@ class Test_Login(FrameTestCase):
         page = LoginPage(self.driver)
         page.open()
         page.login_with(username='admin', password='Password')
+        self.take_numbered_screenshot()
         self.assertions.verify_true(self.driver.current_url.endswith('login'))
 
     def test_empty_password(self):
@@ -31,6 +33,7 @@ class Test_Login(FrameTestCase):
         page.open()
         page.login_with(username='admin', password='')
         mes = page.get_error_message()
+        self.take_numbered_screenshot()
         self.assertions.verify_equal(page.title(), title)
         self.assertions.verify_equal(mes, empty_pass, None)
 
@@ -39,5 +42,6 @@ class Test_Login(FrameTestCase):
         page.open()
         page.login_with(username='Admin', password='password')
         mes = page.get_error_message()
+        self.take_numbered_screenshot()
         self.assertions.verify_equal(page.title(), title)
         self.assertions.verify_equal(mes, invalid_creds, None)

@@ -1,4 +1,4 @@
-from pages.elements.element import Element
+from hrmsm.pages.elements.element import Element
 
 
 class CheckBox(Element):

@@ -14,28 +14,19 @@ class FrameTestCase(BaseTestCase):
         self.config = c.prepare()
         browser_conf = self.config["browser"]
         self.browser = Browser(browser_conf, self.config)
-        self.driver = self.browser.driver
+        self._screenshot_number = 1
         self.verification_errors = []
+        self.driver = self.browser.driver
         self.assertions = Assertions(self.driver, self.verification_errors)
 
+    @classmethod
     def teardown_class(self):
         if hasattr(self, "driver"):
             self.driver.quit()
 
-
     def setup_method(self, method):
         self.current_method = method.__name__
 
-
-        if hasattr(self.browser, "proxy"):
-            self.proxy = self.browser.proxy
-
-        self._screenshot_number = 1
-
-    def teardown_method(self):
-
-        if hasattr(self.browser, "proxy"):
-            self.proxy.close()
 
     def take_numbered_screenshot(self):
         if self.config["sframe"]["screenshots"]:
@@ -45,6 +36,5 @@ class FrameTestCase(BaseTestCase):
 
     def take_named_screenshot(self, name):
         method_dir = self.prepare_screenshots_dir()
-
         image_path = os.path.join(method_dir, str(name) + ".png")
         self.driver.get_screenshot_as_file(image_path) 

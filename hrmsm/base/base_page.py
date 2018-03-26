@@ -104,3 +104,4 @@ class BasePage (object):
 
     def title(self):
         return self.driver.title
+

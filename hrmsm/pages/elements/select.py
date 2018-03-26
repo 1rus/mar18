@@ -1,7 +1,7 @@
-from pages.elements.element import Element
+from hrmsm.pages.elements.element import Element
 from selenium.webdriver.support.select import Select as SeleniumSelect
-from exceptions import InvalidLocatorString
-from webelement import WebElement
+from hrmsm.exceptions import InvalidLocatorString
+from hrmsm.webelement import WebElement
 
 
 class Select(SeleniumSelect):

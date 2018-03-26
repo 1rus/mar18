@@ -1,7 +1,7 @@
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from hrmsm.exceptions import InvalidLocatorString
-from hrmsm.webelement import *
+from hrmsm.webelement import WebElement
 
 
 
@@ -13,7 +13,7 @@ class FrameWebdriver(webdriver.Remote):
     def find_element_by_locator(self, locator):
         locator_type, locator_value = locator.split('=')
         if locator_type == 'id':
-            e = WebElement(self.find_element_by_id(locator_value))
+            return self.find_element_by_id(locator_value)
         elif locator_type == 'class':
             e = WebElement(self.find_element_by_class_name(locator_value))
         elif locator_type == 'tag':
@@ -30,15 +30,15 @@ class FrameWebdriver(webdriver.Remote):
     def find_elements_by_locator(self, locator):
         locator_type, locator_value = locator.split('=')
         if locator_type == 'id':
-            elements = WebElement(self.find_elements_by_id(locator_value))
+            elements = self.find_elements_by_id(locator_value)
         elif locator_type == 'class':
-            elements = WebElement(self.find_elements_by_class_name(locator_value))
+            elements = self.find_elements_by_class_name(locator_value)
         elif locator_type == 'tag':
-            e = WebElement(self.find_elements_by_tag_name(locator_value))
+            elements = self.find_elements_by_tag_name(locator_value)
         elif locator_type == 'css':
-            e = WebElement(self.find_elements_by_css_selector(locator_value))
+            elements = self.find_elements_by_css_selector(locator_value)
         elif locator_type == 'xpath':
-            e = WebElement(self.find_elements_by_xpath(locator_value))
+            elements = self.find_elements_by_xpath(locator_value)
         else:
             raise InvalidLocatorString(locator)
         return [WebElement(e) for e in elements]
