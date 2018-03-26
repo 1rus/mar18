@@ -9,7 +9,7 @@ empty_pass = 'Password cannot be empty'
 invalid_creds = 'Invalid credentials'
 
 
-@pytest.mark.incremental
+#@pytest.mark.incremental
 class Test_Login(FrameTestCase):
 
 
@@ -31,7 +31,6 @@ class Test_Login(FrameTestCase):
         page.open()
         page.login_with(username='admin', password='')
         mes = page.get_error_message()
-        print(mes)
         self.assertions.verify_equal(page.title(), title)
         self.assertions.verify_equal(mes, empty_pass, None)
 
@@ -40,6 +39,5 @@ class Test_Login(FrameTestCase):
         page.open()
         page.login_with(username='Admin', password='password')
         mes = page.get_error_message()
-        print(mes)
         self.assertions.verify_equal(page.title(), title)
         self.assertions.verify_equal(mes, invalid_creds, None)

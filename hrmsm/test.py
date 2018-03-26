@@ -2,6 +2,7 @@ import selenium.webdriver
 from selenium.webdriver.chrome import options
 import selenium.webdriver.chrome
 from hrmsm.wrapconfig import Config
+from hrmsm.base.FrameTest import FrameTestCase
 import os
 
 
@@ -48,6 +49,19 @@ browser.find_element_by_id('btnLogin').click()
 
 browser.quit()
 '''
-cf = Config()
-cf.prepare()
-print(os.environ["OUTPUT_DIR"])
+
+tc = FrameTestCase()
+print(classmethod.__name__)
+#tc.setup_class()
+#tc.setup_method(classmethod)
+#print("len is - ", len(os.environ["OUTPUT_DIR"]))
+if "OUTPUT_DIR" in os.environ.keys():
+    print("length is not null, output dir is created")
+    tc.take_numbered_screenshot()
+    print(len(os.environ["SCREENSHOTS_DIR"]))
+    tc.take_numbered_screenshot()
+    print(tc.config)
+else:
+    raise Exception("configure error")
+
+tc.teardown_method()
