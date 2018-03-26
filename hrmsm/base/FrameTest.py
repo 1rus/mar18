@@ -12,18 +12,20 @@ class FrameTestCase(BaseTestCase):
     def setup_class(self):
         c = Config()
         self.config = c.prepare()
-
-    def teardown_class(self):
-        pass
-
-    def setup_method(self, method):
-        self.current_method = method.__name__
-
         browser_conf = self.config["browser"]
         self.browser = Browser(browser_conf, self.config)
         self.driver = self.browser.driver
         self.verification_errors = []
         self.assertions = Assertions(self.driver, self.verification_errors)
+
+    def teardown_class(self):
+        if hasattr(self, "driver"):
+            self.driver.quit()
+
+
+    def setup_method(self, method):
+        self.current_method = method.__name__
+
 
         if hasattr(self.browser, "proxy"):
             self.proxy = self.browser.proxy
@@ -31,8 +33,6 @@ class FrameTestCase(BaseTestCase):
         self._screenshot_number = 1
 
     def teardown_method(self):
-        if hasattr(self, "driver"):
-            self.driver.quit()
 
         if hasattr(self.browser, "proxy"):
             self.proxy.close()
