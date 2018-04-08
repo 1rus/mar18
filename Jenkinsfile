@@ -5,7 +5,7 @@ node ('master') {
     }
     def pythonImage
     stage('build docker image'){
-        pythonImage = docker.build('dec17:test')
+        pythonImage = docker.build('mar18:test')
     }
     stage('test'){
         pythonImage.inside {

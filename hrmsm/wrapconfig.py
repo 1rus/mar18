@@ -45,12 +45,12 @@ class Config(object):
                         else:
                             self._data[section_name] = yaml.load(o)
                     o.close()
-        if "OUTPUT_DIR" not in os.environ:
+        if "OUTPUT_DIR" not in os.environ.keys():
             timestamp = time.strftime("%Y-%m-%d-%H-%M-%S")
             log_dir = os.path.join(cwd, "output", timestamp, "logs")
             os.makedirs(log_dir)
         else:
-            log_dir = os.environ["OUTPUT_DIR"]
+            log_dir = os.path.join(os.environ["OUTPUT_DIR"], "logs")
             timestamp = str(os.environ["OUTPUT_DIR"])[-19:]
         self._data["sframe"]["output"] = os.environ["OUTPUT_DIR"] = os.path.join(cwd, "output", timestamp)
         self._data["sframe"]["base"] = cwd

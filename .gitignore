@@ -11,6 +11,7 @@ output/
 *.py[cod]
 *.eggs
 *.xml
+debug.log
 
 build/
 venv/

@@ -1,7 +1,7 @@
 from hrmsm.pages.login_page import LoginPage
 from hrmsm.base.FrameTest import FrameTestCase
 import pytest
-
+import os
 
 title = 'OrangeHRM'
 success = 'Welcome Admin'
@@ -14,9 +14,10 @@ class Test_Login(FrameTestCase):
 
     def test_valid_login(self):
         page = LoginPage(self.driver)
-        page.open()
-        page.login_with(username='admin', password='Password')
         self.take_numbered_screenshot()
+        page.open()
+        self.take_numbered_screenshot()
+        page.login_with(username='admin', password='Password')
         self.take_numbered_screenshot()
         self.assertions.verify_equal(page.title(), title)
         self.assertions.verify_equal(self.driver.find_element_by_id('welcome').text, success)
