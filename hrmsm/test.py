@@ -1,12 +1,16 @@
 import selenium.webdriver
-from selenium.webdriver.chrome import options
+from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.chrome import webdriver
 from hrmsm.wrapconfig import Config
 from hrmsm.webelement import WebElement
 from hrmsm.base.FrameTest import FrameTestCase
+from hrmsm.exceptions import ElementNotFound
 import os
 import os.path
+from collections import namedtuple
+
 import numpy
+import time
 from math import factorial
 
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
@@ -28,7 +32,7 @@ cap_map = {
     "edge": DesiredCapabilities.EDGE.copy(),
     "safari": DesiredCapabilities.SAFARI.copy()
 }
-
+"""
 c=[]
 c = Config()
 c.prepare()
@@ -41,7 +45,7 @@ if isinstance(c, Config) and hasattr(c, "_data"):
     print("c has data")
     print(len(c.__dict__['_data']))
 else:
-    print("config not prepared")
+    print("config not prepared")"""
 '''
 array_size = 10
 number = 10
@@ -93,16 +97,62 @@ def factorial2(n):
         n = n - 1
     return num
 
-print(factorial1(y), factorial2(y), factorial(y))
-#browser = selenium.webdriver.Remote(command_executor='http://10.0.0.3:5555/wd/hub', desired_capabilities=caps, browser_profile=None)
-'''
-caps = cap_map['chrome']
-browser = selenium.webdriver.Chrome()
-browser.get('http://hrm.seleniumminutes.com')
+print(factorial1(y), factorial2(y), factorial(y))'''
 
-browser.find_element_by_id('txtUsername').send_keys('admin')
-browser.find_element_by_id('txtPassword').send_keys('Password')
-browser.find_element_by_id('btnLogin').click()
+caps = cap_map['chrome']
+browser = selenium.webdriver.Remote(command_executor='http://10.0.0.215:5555/wd/hub', desired_capabilities=caps, browser_profile=None)
+browser.get('https://www.amazon.com')
+browser.find_element_by_css_selector("input#twotabsearchtextbox").send_keys("ipad air 2 case")
+browser.find_element_by_css_selector("input.nav-input[value='Go'").click()
+browser.find_element_by_css_selector("input[name='s-ref-checkbox-8080061011'][type='checkbox']").click()
+time.sleep(3)
+el = browser.find_element_by_css_selector("#low-price")
+el.clear()
+el.send_keys("20")
+el = browser.find_element_by_css_selector("#high-price")
+el.clear()
+el.send_keys("100")
+browser.find_element_by_css_selector('input.a-button-input[type="submit"][value="Go"]').click()
+els = browser.find_elements_by_css_selector('li[id^="result"][class*="result"]')
+print(len(els))
+listofcases = namedtuple('Case', 'name link price rating')
+
+cases = [None]*len(els)
+cases[0] = listofcases(name="case1", price=9.99, rating=4.4, link='www.amazon.com')
+prices=[]
+ratings=[]
+hrefs=[]
+names=[]
+
+
+for el in els:
+    ele = el.find_element_by_css_selector("a[class='a-link-normal s-access-detail-page  s-color-twister-title-link a-text-normal']")
+    name=ele.get_attribute("title")
+    href=ele.get_attribute("href")
+    print(name, href)
+    names.append(name)
+    hrefs.append(href)
+    try:
+        ele = el.find_element_by_css_selector("div > div:nth-child(4) > div:nth-child(1) > a > span.a-offscreen")
+        price = ele.get_attribute("innerHTML")
+    except NoSuchElementException:
+        price = "No Amazon price"
+
+    try:
+        ele = el.find_element_by_css_selector("span>span>a>i>span")
+        rating = ele.get_attribute("innerHTML")
+    except NoSuchElementException:
+        rating = "No rating yet"
+    finally:
+        print("rating = ", rating)
+        print("price = ", price)
+        ratings.append(rating)
+        prices.append(price)
+print(len(prices))
+print(prices)
+print(len(ratings))
+print(ratings)
+print(cases)
 
 browser.quit()
 '''

@@ -1,8 +1,8 @@
-from hrmsm.browser import Browser
+from framework.browser import Browser
 import os.path
-from hrmsm.base.BaseTest import BaseTestCase
-from hrmsm.wrapconfig import Config
-from hrmsm.assertions import Assertions
+from framework.base.BaseTest import BaseTestCase
+from framework.wrapconfig import Config
+from framework.assertions import Assertions
 import pytest
 
 

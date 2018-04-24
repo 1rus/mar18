@@ -1,7 +1,7 @@
 import os
 import os.path
 import time
-from hrmsm.exceptions import ElementTextTimeout, ElementVisiblityTimeout
+from framework.exceptions import ElementTextTimeout, ElementVisiblityTimeout
 from selenium.common.exceptions import StaleElementReferenceException
 from selenium.webdriver.common.by import By
 

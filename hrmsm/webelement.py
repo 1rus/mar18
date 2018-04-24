@@ -1,5 +1,5 @@
 from selenium.webdriver.remote.webelement import WebElement as SeleniumWebElement
-from hrmsm.exceptions import InvalidLocatorString
+from framework.exceptions import InvalidLocatorString
 
 
 class WebElement(SeleniumWebElement):
