@@ -1,10 +1,10 @@
-from hrmsm.base.base_page import BasePage
-from hrmsm.pages.login_page import LoginPage
+from framework.base.base_page import BasePage
+from framework.pages.login_page import LoginPage
 from selenium.webdriver.common.keys import Keys
-from hrmsm.pages.elements.attribute import Attribute
-from hrmsm.pages.elements.checkbox import CheckBox
-from hrmsm.pages.elements.select import Select
-from hrmsm.pages.elements.input_textarea import Input
+from framework.pages.elements.attribute import Attribute
+from framework.pages.elements.checkbox import CheckBox
+from framework.pages.elements.select import Select
+from framework.pages.elements.input_textarea import Input
 import random
 import string
 import array

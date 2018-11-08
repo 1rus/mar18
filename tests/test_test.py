@@ -1,6 +1,6 @@
-from hrmsm.pages.pim_page import PIM_Page
-from hrmsm.pages.login_page import LoginPage
-from hrmsm.base.FrameTest import FrameTestCase
+from framework.pages.pim_page import PIM_Page
+from framework.pages.login_page import LoginPage
+from framework.base.FrameTest import FrameTestCase
 import pytest
 
 

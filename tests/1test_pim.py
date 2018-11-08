@@ -1,5 +1,5 @@
-from hrmsm.base.FrameTest import FrameTestCase
-from hrmsm.pages.pim_page import PIM_Page
+from framework.base.FrameTest import FrameTestCase
+from framework.pages.pim_page import PIM_Page
 import pytest
 
 name = "Smith"

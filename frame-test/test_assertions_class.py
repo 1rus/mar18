@@ -1,4 +1,4 @@
-from hrmsm.assertions import Assertions as a
+from framework.assertions import Assertions as a
 import pytest
 
 

@@ -1,10 +1,10 @@
 import selenium.webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.chrome import webdriver
-from hrmsm.wrapconfig import Config
-from hrmsm.webelement import WebElement
-from hrmsm.base.FrameTest import FrameTestCase
-from hrmsm.exceptions import ElementNotFound
+from framework.wrapconfig import Config
+from framework.webelement import WebElement
+from framework.base.FrameTest import FrameTestCase
+from framework.exceptions import ElementNotFound
 import os
 import os.path
 from collections import namedtuple

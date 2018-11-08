@@ -1,4 +1,4 @@
 import pytest
-from hrmsm.wrapconfig import Config
+from framework.wrapconfig import Config
 
 

@@ -1,4 +1,4 @@
-from hrmsm.base.base_page import BasePage
+from framework.base.base_page import BasePage
 
 locators = {'username': 'id=txtUsername',
             'password': 'id=txtPassword',

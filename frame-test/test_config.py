@@ -1,7 +1,7 @@
-from hrmsm.exceptions import *
-from hrmsm.wrapconfig import Config
-from hrmsm.browser import Browser
-from hrmsm.assertions import Assertions
+from framework.exceptions import *
+from framework.wrapconfig import Config
+from framework.browser import Browser
+from framework.assertions import Assertions
 
 if 2 == 2:
     a = InvalidLocatorString('invalid locator string')

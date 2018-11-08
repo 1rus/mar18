@@ -8,7 +8,7 @@ import pytest
 
 class FrameTestCase(BaseTestCase):
 
-    @classmethod
+   # @classmethod
     def setup_class(self):
         c = Config()
         self.config = c.prepare()
@@ -19,7 +19,7 @@ class FrameTestCase(BaseTestCase):
         self.driver = self.browser.driver
         self.assertions = Assertions(self.driver, self.verification_errors)
 
-    @classmethod
+   # @classmethod
     def teardown_class(self):
         if hasattr(self, "driver"):
             self.driver.quit()
